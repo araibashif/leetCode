@@ -1,0 +1,24 @@
+bool hasCycle(struct ListNode *head) {
+    struct ListNode *temp,*prev;
+    temp=head;
+    prev=temp;
+    if(head==NULL || head->next==NULL)
+        return false ;
+    while(temp!=NULL && temp->next!=NULL)
+    {
+        temp=temp->next->next;
+        while(prev!=NULL && prev->next!=NULL)
+        {
+            if(prev==temp)
+                return true ;
+            else 
+            {
+                if(temp==NULL || temp->next==NULL)
+                    return false ;
+                prev=prev->next;
+                temp=temp->next->next;
+            }  
+        }
+    }
+    return false ;
+}
