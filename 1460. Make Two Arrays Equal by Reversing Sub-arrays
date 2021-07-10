@@ -1,0 +1,49 @@
+
+
+bool canBeEqual(int* target, int targetSize, int* arr, int arrSize){
+quickSort(arr,0,arrSize-1);
+quickSort(target,0,targetSize-1);
+    for(int i = 0;i<arrSize;i++)
+    {
+        if(arr[i]!=target[i])
+            return false ;            
+    }
+    return true;
+}
+void quickSort(int arr[],int low,int high)
+{
+    if(low<high)
+    {
+        int pivot = partition(arr,low,high);
+        
+        
+        quickSort(arr,low,pivot-1);
+        quickSort(arr,pivot+1,high);
+        
+    }
+}
+int partition(int arr[],int low , int high)
+{
+    int pivot = arr[low];
+    int i = low;
+    int j = high;
+    int temp;
+    while(i<j)
+    {
+        while(arr[i]<=pivot && i<j)
+            i++;
+        while(arr[j]>pivot)
+            j--;
+        if(i<j)
+        {
+            temp=arr[i];
+            arr[i]=arr[j];
+            arr[j]=temp;
+        }
+   }
+    temp=arr[low];
+    arr[low]=arr[j];
+    arr[j]=temp;
+    
+    return j;
+}
