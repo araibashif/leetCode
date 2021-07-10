@@ -1,0 +1,49 @@
+
+
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* sortedSquares(int* nums, int numsSize, int* returnSize){
+int* arr=(int*)malloc( numsSize * sizeof(int));
+    *returnSize=numsSize;
+    for(int i = 0;i<numsSize;i++)
+    {
+        arr[i]=nums[i]*nums[i];
+    }
+    quickSort(arr,0,numsSize-1);
+    return arr;
+}
+void quickSort(int arr[],int low ,int high)
+{
+    if(low<high)
+    {
+        int pivot = partition(arr,low,high);
+        
+        quickSort(arr,low,pivot-1);
+        quickSort(arr,pivot+1,high);
+    }
+}
+int partition(int arr[],int low , int high)
+{
+    int pivot = arr[low];
+    int i = low;
+    int j=high;
+    int temp;
+    while(i<j)
+    {
+        while(arr[i] <= pivot && i<j )
+            i++;
+        while(arr[j] > pivot)
+            j--;
+        if(i<j)
+        {
+            temp=arr[i];
+            arr[i]=arr[j];
+            arr[j]=temp;
+        }
+    }
+    temp=arr[low];
+    arr[low]=arr[j];
+    arr[j]=temp;
+    return j ;
+}
