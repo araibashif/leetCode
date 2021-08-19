@@ -1,0 +1,29 @@
+class Solution {
+    public List<String> commonChars(String[] words) {
+        HashMap<Character ,Integer> hmap = new HashMap<>();
+        for(String s: words){
+            HashMap<Character,Integer> temp = new HashMap<>();
+             for(int i=0;i<s.length();i++){
+                 temp.put(s.charAt(i),temp.getOrDefault(s.charAt(i),0)+1);
+             }
+            if(hmap.isEmpty()){
+                for(Character ch: temp.keySet()){
+                    hmap.put(ch,temp.get(ch));
+                }
+            }
+            else {
+                for(Character ch: hmap.keySet()){
+                    int val = temp.getOrDefault(ch,0);
+                    hmap.put(ch,Math.min(val,hmap.get(ch)));
+                }
+            }
+        }
+        List<String> result = new ArrayList<>();
+        for(Character ch: hmap.keySet()){
+            for(int i =0;i<hmap.get(ch);i++){
+                result.add(ch.toString());
+            }
+        }
+        return result;
+    }
+}
