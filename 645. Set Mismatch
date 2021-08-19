@@ -1,0 +1,92 @@
+
+
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+bool binarySearrch(int arr[],int low , int high,int target);
+int* findErrorNums(int* nums, int numsSize, int* returnSize){
+    int* arr=(int*)calloc(sizeof(int),2);
+    *returnSize=2;
+    
+int i ;
+     quickSort(nums,0,numsSize-1);
+    for(i=0;i<numsSize-1;i++)
+    {
+        if(nums[i]==nums[i+1])
+        {
+        arr[0]=nums[i];
+        break;
+        }
+    }
+    for(i=0;i<numsSize;)
+    {
+        bool result =binarySearrch(nums,0,numsSize-1,i+1);
+        if(result)
+        {
+           i++;
+        }
+        else 
+        {
+            arr[1]=i+1;
+            break;
+        }
+    }
+    return arr;
+}
+void quickSort(int arr[],int low,int high)
+{
+    if(low<high)
+    {
+        int pivot =partition(arr,low,high);
+        
+        quickSort(arr,low,pivot-1);
+        quickSort(arr,pivot+1,high);
+    }
+}
+int partition( int arr[] , int low, int high )
+{
+    int pivot =arr[low];
+    int i=low;
+    int j =high;
+    int temp;
+    
+    while( i < j )
+    {
+        while(arr[i]<=pivot && i<j)
+        {
+            i++;
+        }
+        while(arr[j]>pivot)
+            j--;
+        if(i<j)
+        {
+            temp=arr[i];
+            arr[i]=arr[j];
+            arr[j]=temp;
+        }
+    }
+    temp=arr[low];
+    arr[low]=arr[j];
+    arr[j]=temp;
+    return j;
+}
+bool binarySearrch(int arr[],int low , int high,int target)
+{
+ 
+    while(low<=high)
+    {
+         int mid =low+(high-low)/2;
+        if(arr[mid]==target)
+        {
+             return true;
+        }
+        else if( target <arr[mid])
+        {
+            high=mid-1;
+        }
+        else 
+            low=mid+1;
+            
+    }
+    return false;
+}
