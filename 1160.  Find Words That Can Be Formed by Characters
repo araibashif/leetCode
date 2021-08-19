@@ -1,0 +1,36 @@
+class Solution {
+    public int countCharacters(String[] words, String chars ) {
+        int ans =0;
+        HashMap<Character,Integer> hmap = new HashMap<>();
+        for(int i=0;i<chars.length();i++){
+            hmap.put(chars.charAt(i),hmap.getOrDefault(chars.charAt(i),0)+1);
+        }
+        for(String s:words){
+            HashMap<Character,Integer> temp = new HashMap<>();
+            int len = s.length();
+            for(int i=0;i<s.length();i++){
+                temp.put(s.charAt(i),temp.getOrDefault(s.charAt(i),0)+1);
+            }
+            boolean flag = true;
+            for(Character c: temp.keySet()){
+                if(hmap.containsKey(c)){
+                    if(hmap.get(c)>=temp.get(c)){
+                     continue ;
+                }else {
+                    flag = false ;
+                    break;
+                    }
+            }
+                else {
+                    flag = false ;
+                    break;
+                }
+            }
+            if(flag){
+                ans+=len;
+           }
+    }
+             
+        return ans;
+    }
+}
