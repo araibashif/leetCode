@@ -1,0 +1,39 @@
+/*You are given an array of strings words (0-indexed).
+
+In one operation, pick two distinct indices i and j, where words[i] is a non-empty string, and move any character from words[i] to any position in words[j].
+
+Return true if you can make every string in words equal using any number of operations, and false otherwise.
+
+
+Input: words = ["abc","aabc","bc"]
+Output: true
+Explanation: Move the first 'a' in words[1] to the front of words[2],
+to make words[1] = "abc" and words[2] = "abc".
+
+All the strings are now equal to "abc", so return true.
+*/
+
+
+
+
+
+
+class Solution {
+    public boolean makeEqual(String[] word) {
+        HashMap<Character,Integer> hmap = new HashMap<>();
+        String str = word.toString();
+        for(String s : word){
+            int len = s.length();
+           for(int i=0;i<len;i++){
+             hmap.put(s.charAt(i),hmap.getOrDefault(s.charAt(i),0)+1);
+        }
+    }
+        for(Character ch :hmap.keySet()){
+            int val = hmap.get(ch);
+            if(val%word.length==0){
+                continue;
+            }else return false ;
+        }
+        return true;
+    }
+}
