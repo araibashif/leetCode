@@ -1,0 +1,31 @@
+/*Given an integer array nums and an integer k, return the kth largest element in the array.
+
+Note that it is the kth largest element in the sorted order, not the kth distinct element.
+
+ 
+
+Example 1:
+
+Input: nums = [3,2,1,5,6,4], k = 2
+Output: 5
+*/
+Solution :
+      class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        Arrays.sort(nums);
+      HashSet<Integer> set = new HashSet<>();
+        int number=0;
+        for(int i=nums.length-1;i>=0;i--){
+            if(k==0)
+                break;
+            else if(!set.contains(nums[i])){
+                number = nums[i];
+                k--;
+            } 
+            else 
+                set.add(nums[i]);
+        }
+        return number;
+    }
+}
+/* note : will upload much optimal solution with help of PriorityQueue
